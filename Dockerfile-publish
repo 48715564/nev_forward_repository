@@ -1,0 +1,8 @@
+FROM daocloud.io/ecar/nev-docker-springcloud:master-60f74ba
+
+COPY /project/build/libs/nev-forward-check-0.0.1-SNAPSHOT.jar  \
+/usr/src/myapp/nev-forward-check-0.0.1-SNAPSHOT.jar
+
+WORKDIR /usr/src/myapp/
+
+CMD java -jar nev-forward-check-0.0.1-SNAPSHOT.jar

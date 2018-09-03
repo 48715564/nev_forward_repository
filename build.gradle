@@ -1,0 +1,59 @@
+group 'io.daocloud'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    ext {
+        springBootVersion = '1.5.6.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+    maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+    maven { url 'http://nexus.daocloud.io/repository/maven-public/' }
+    maven { url 'http://nexus.mschina.io/nexus/content/groups/public/' }
+    mavenCentral()
+}
+
+dependencies {
+    compile(group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '1.5.6.RELEASE')
+
+    compile('org.springframework.boot:spring-boot-starter-web')
+    compile('org.springframework.boot:spring-boot-starter-actuator')
+//    compile('org.springframework.cloud:spring-cloud-starter-eureka') {
+//        exclude group: 'io.netty'
+//    }
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    compile group: 'com.google.guava', name: 'guava', version: '23.0'
+    compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.9.0'
+
+    compileOnly('org.projectlombok:lombok')
+    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.7-dmr'
+    compile group: 'commons-io', name: 'commons-io', version: '2.6'
+    compile group: 'com.alibaba', name: 'druid', version: '1.1.6'
+    compile group: 'com.squareup', name: 'tape', version: '1.2.3'
+    compile group: 'com.dangdang', name: 'sharding-jdbc-core', version: '1.5.4'
+    compile group: 'com.dangdang', name: 'sharding-jdbc-self-id-generator', version: '1.4.2'
+}
+
+ext {
+    springCloudVersion = 'Dalston.RELEASE'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}

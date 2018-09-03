@@ -1,0 +1,12 @@
+FROM gradle
+
+LABEL maintainer "xiaohuo.ren@daocloud.io"
+
+USER root
+
+WORKDIR /project
+ADD . /project
+
+RUN gradle bootRepackage
+
+CMD ["gradle"]
